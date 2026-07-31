@@ -350,7 +350,9 @@ export const usePuterStore = create<PuterStore>((set, get) => {
           ],
         },
       ],
-      { model: "claude-sonnet-4" }
+      // max_tokens must be high enough to fit the full Feedback JSON,
+      // otherwise the response is truncated into invalid JSON.
+      { model: "anthropic/claude-sonnet-5", max_tokens: 8000 }
     ) as Promise<AIResponse | undefined>;
   };
 
